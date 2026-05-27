@@ -1,0 +1,63 @@
+add_refill:
+  name: Betankung hinzufügen
+  description: Fügt eine neue Betankung ins Logbuch ein
+  fields:
+    liters_added:
+      name: Hinzugefügte Liter
+      description: Wieviel Liter wurden getankt?
+      required: true
+      example: 500
+      selector:
+        number:
+          min: 1
+          max: 10000
+          unit_of_measurement: L
+    datetime:
+      name: Datum & Uhrzeit
+      description: Zeitpunkt der Betankung (leer = jetzt)
+      required: false
+      example: "2024-01-15 14:30:00"
+      selector:
+        text:
+    note:
+      name: Notiz
+      description: Optionale Anmerkung
+      required: false
+      selector:
+        text:
+
+add_calibration:
+  name: Füllstand abgleichen
+  description: Trägt einen manuellen Füllstandsabgleich ein
+  fields:
+    current_level:
+      name: Aktueller Füllstand (Liter)
+      description: Wieviel Liter sind aktuell im Tank?
+      required: true
+      example: 2100
+      selector:
+        number:
+          min: 0
+          max: 10000
+          unit_of_measurement: L
+    datetime:
+      name: Datum & Uhrzeit
+      description: Zeitpunkt des Abgleichs (leer = jetzt)
+      required: false
+      selector:
+        text:
+    note:
+      name: Notiz
+      required: false
+      selector:
+        text:
+
+delete_entry:
+  name: Eintrag löschen
+  description: Löscht einen Logeintrag anhand der ID
+  fields:
+    entry_id:
+      name: Eintrags-ID
+      required: true
+      selector:
+        text:
