@@ -89,3 +89,8 @@ class OilTankStore:
         if not calibrations:
             return None
         return max(calibrations, key=lambda x: x["datetime"])
+
+    @property
+    def data(self) -> dict:
+        """Rohdaten zurückgeben."""
+        return self._data

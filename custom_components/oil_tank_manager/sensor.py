@@ -22,7 +22,6 @@ async def async_setup_entry(
     sensor = OilTankLevelSensor(hass, entry.entry_id, tank_size)
     async_add_entities([sensor])
 
-    # Auf Updates lauschen
     @callback
     def handle_update(event):
         sensor.update_from_storage()
@@ -43,28 +42,34 @@ class OilTankLevelSensor(SensorEntity):
         self._attr_native_unit_of_measurement = "L"
         self._attr_icon = "mdi:barrel"
         self._attr_native_value = None
-        self._current_level = None
 
     def update_from_storage(self):
         """Füllstand aus gespeicherten Daten berechnen."""
-        store_data = self._hass.data.get(DOMAIN, {}).get("data", {})
-        entries = store_data.get("entries", [])
+        domain_data = self._hass.data.get(DOMAIN, {}).get(self._entry_id, {})
+        store = domain_data.get("store")
 
-        if not entries:
+        if store is None:
+            _LOGGER.warning("Store nicht gefunden!")
             return
 
-        # Letzten Eintrag nehmen
-        last = entries[-1]
-        entry_type = last.get("type")
+        entries = sorted(
+            store.data.get("entries", []),
+            key=lambda x: x["datetime"]
+        )
 
-        if entry_type == "calibration":
-            self._attr_native_value = last.get("current_level")
-        elif entry_type == "refill":
-            # Vorherigen Füllstand + Menge
-            prev = self._attr_native_value or 0
-            self._attr_native_value = prev + last.get("liters_added", 0)
+        if not entries:
+            _LOGGER.debug("Keine Einträge vorhanden")
+            return
 
-        _LOGGER.debug("Füllstand aktualisiert: %s L", self._attr_native_value)
+        level = None
+        for entry in entries:
+            if entry["type"] == "calibration":
+                level = entry["current_level"]
+            elif entry["type"] == "refill" and level is not None:
+                level += entry["liters_added"]
+
+        self._attr_native_value = level
+        _LOGGER.debug("Füllstand berechnet: %s L", level)
 
     @property
     def extra_state_attributes(self):
