@@ -16,9 +16,8 @@ add_refill:
       name: Datum & Uhrzeit
       description: Zeitpunkt der Betankung (leer = jetzt)
       required: false
-      example: "2024-01-15 14:30:00"
       selector:
-        text:
+        datetime:
     note:
       name: Notiz
       description: Optionale Anmerkung
@@ -45,7 +44,7 @@ add_calibration:
       description: Zeitpunkt des Abgleichs (leer = jetzt)
       required: false
       selector:
-        text:
+        datetime:
     note:
       name: Notiz
       required: false
