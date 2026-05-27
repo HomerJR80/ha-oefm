@@ -1,0 +1,11 @@
+{
+  "domain": "oil_tank_manager",
+  "name": "Öltank Manager",
+  "version": "0.1.0",
+  "documentation": "https://github.com/HomerJR80/ha-oefm",
+  "dependencies": [],
+  "codeowners": ["@HomerJR80"],
+  "requirements": [],
+  "iot_class": "local_push",
+  "config_flow": true
+}

@@ -1,0 +1,18 @@
+# Home Assistant Secrets
+secrets.yaml
+configuration.yaml
+.storage/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# IDE
+.vscode/settings.json
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Öltank Manager einrichten",
+        "description": "Gib deine Tankdaten ein. Diese können später jederzeit geändert werden.",
+        "data": {
+          "tank_size": "Tankgröße",
+          "energy_sensor": "Energiezähler des Ölkessels",
+          "kwh_per_liter": "Verbrauchsfaktor"
+        },
+        "data_description": {
+          "tank_size": "Gesamtvolumen deines Öltanks in Litern",
+          "energy_sensor": "Wähle den Energiesensor deines Ölkessels aus",
+          "kwh_per_liter": "Typisch: ~10 kWh pro Liter Heizöl"
+        }
+      }
+    },
+    "error": {
+      "invalid_tank_size": "Tankgröße muss mindestens 100 Liter betragen",
+      "invalid_kwh": "Verbrauchsfaktor muss zwischen 5.0 und 15.0 kWh/L liegen"
+    },
+    "abort": {
+      "already_configured": "Öltank Manager ist bereits eingerichtet"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Öltank Manager - Einstellungen",
+        "description": "Einstellungen anpassen",
+        "data": {
+          "tank_size": "Tankgröße",
+          "energy_sensor": "Energiezähler des Ölkessels",
+          "kwh_per_liter": "Verbrauchsfaktor"
+        },
+        "data_description": {
+          "tank_size": "Gesamtvolumen deines Öltanks in Litern",
+          "energy_sensor": "Energiesensor des Ölkessels",
+          "kwh_per_liter": "Typisch: ~10 kWh pro Liter Heizöl"
+        }
+      }
+    },
+    "error": {
+      "invalid_tank_size": "Tankgröße muss mindestens 100 Liter betragen",
+      "invalid_kwh": "Verbrauchsfaktor muss zwischen 5.0 und 15.0 kWh/L liegen"
+    }
+  }
+}
