@@ -8,7 +8,7 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.helpers import selector
 
-from . import (
+from .const import (
     DOMAIN,
     CONF_TANK_SIZE,
     CONF_ENERGY_SENSOR,
