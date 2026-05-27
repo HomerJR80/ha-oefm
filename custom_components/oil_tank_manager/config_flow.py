@@ -120,12 +120,9 @@ class OilTankOptionsFlow(config_entries.OptionsFlow):
             if not errors:
                 return self.async_create_entry(
                     title="",
-                    data={
-                        **self.config_entry.data,
-                        **user_input,
-                    },
+                    data=user_input,
                 )
-
+                
         current = self.config_entry.data
 
         return self.async_show_form(

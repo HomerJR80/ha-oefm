@@ -18,7 +18,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     hass.data[DOMAIN][entry.entry_id] = {
         "store": store,
-        "config": entry.data,
+        "config": {**entry.data, **entry.options},
     }
 
     # Services registrieren

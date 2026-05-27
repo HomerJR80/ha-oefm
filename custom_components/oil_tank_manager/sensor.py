@@ -7,7 +7,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.components.sensor import SensorEntity
 
-from . import DOMAIN, CONF_TANK_SIZE
+from .const import DOMAIN, CONF_TANK_SIZE
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -18,7 +18,7 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Sensoren einrichten."""
-    tank_size = entry.data[CONF_TANK_SIZE]
+    tank_size = entry.options.get(CONF_TANK_SIZE) or entry.data.get(CONF_TANK_SIZE)
 
     async_add_entities([
         OilTankLevelSensor(entry.entry_id, tank_size),
