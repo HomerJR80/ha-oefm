@@ -18,8 +18,7 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Sensoren einrichten."""
-    config = hass.data[DOMAIN][entry.entry_id]
-    tank_size = config[CONF_TANK_SIZE]
+    tank_size = entry.data[CONF_TANK_SIZE]
 
     async_add_entities([
         OilTankLevelSensor(entry.entry_id, tank_size),

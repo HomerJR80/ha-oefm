@@ -1,7 +1,7 @@
 {
   "domain": "oil_tank_manager",
   "name": "Öltank Manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "documentation": "https://github.com/HomerJR80/ha-oefm",
   "dependencies": [],
   "codeowners": ["@HomerJR80"],
