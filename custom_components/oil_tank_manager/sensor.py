@@ -28,10 +28,7 @@ async def async_setup_entry(
     """Sensoren einrichten."""
     tank_size = entry.options.get(CONF_TANK_SIZE) or entry.data.get(CONF_TANK_SIZE)
 
-    # Bestehender Füllstandssensor
     level_sensor = OilTankLevelSensor(hass, entry.entry_id, tank_size)
-
-    # Neue Verbrauchssensoren
     daily_sensor = OilTankDailyConsumptionSensor(hass, entry.entry_id)
     monthly_sensor = OilTankMonthlyConsumptionSensor(hass, entry.entry_id)
     yearly_sensor = OilTankYearlyConsumptionSensor(hass, entry.entry_id)
@@ -48,10 +45,6 @@ async def async_setup_entry(
 
     hass.bus.async_listen(f"{DOMAIN}_updated", handle_update)
 
-
-# ─────────────────────────────────────────────
-# BESTEHENDER SENSOR (unverändert)
-# ─────────────────────────────────────────────
 
 class OilTankLevelSensor(SensorEntity):
     """Sensor für den Füllstand."""
@@ -101,10 +94,6 @@ class OilTankLevelSensor(SensorEntity):
         }
 
 
-# ─────────────────────────────────────────────
-# NEUE SENSOREN
-# ─────────────────────────────────────────────
-
 class OilTankBaseSensor(SensorEntity):
     """Basis für Verbrauchssensoren."""
 
@@ -115,11 +104,9 @@ class OilTankBaseSensor(SensorEntity):
         self._attributes = {}
 
     def _get_consumption_data(self) -> dict:
-        """Verbrauchsdaten aus hass.data holen."""
         return self._hass.data.get(DOMAIN, {}).get(self._entry_id, {}).get("consumption", {})
 
     def update_from_storage(self):
-        """Wird bei jedem Update aufgerufen - von Unterklassen überschreiben."""
         pass
 
     @property
@@ -140,7 +127,7 @@ class OilTankDailyConsumptionSensor(OilTankBaseSensor):
         self._attr_unique_id = f"{entry_id}_daily_consumption"
         self._attr_native_unit_of_measurement = UnitOfVolume.LITERS
         self._attr_device_class = SensorDeviceClass.VOLUME
-        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
         self._attr_icon = "mdi:oil"
 
     def update_from_storage(self):
